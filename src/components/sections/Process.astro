@@ -88,18 +88,19 @@ const steps = [
     gsap.set(path, { strokeDasharray: 1, strokeDashoffset: 1 });
     gsap.set(steps, { opacity: 0, y: 24 });
 
-    // The line scrubs both ways; each step appears once when the line reaches it and stays.
-    const reveal = ({ progress }: ScrollTrigger) =>
+    // The line only draws forward (never retracts on scroll up); each step appears once when the line reaches it.
+    let drawn = 0;
+    const advance = ({ progress }: ScrollTrigger) => {
+      if (progress <= drawn) return;
+      drawn = progress;
+      path.style.strokeDashoffset = `${1 - drawn}`; // direct: gsap.set would round px values to 0/1
       steps.forEach((step, i) => {
-        if (step.dataset.shown !== undefined || progress <= 0 || progress < i / (steps.length - 1) - 0.02) return;
+        if (step.dataset.shown !== undefined || drawn < i / (steps.length - 1) - 0.02) return;
         step.dataset.shown = "";
         gsap.to(step, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" });
       });
+    };
 
-    gsap.to(path, {
-      strokeDashoffset: 0,
-      ease: "none",
-      scrollTrigger: { trigger: list, start: "top 75%", end: "bottom 60%", scrub: true, onUpdate: reveal, onRefresh: reveal },
-    });
+    ScrollTrigger.create({ trigger: list, start: "top 75%", end: "bottom 60%", onUpdate: advance, onRefresh: advance });
   }
 </script>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <!-- TODO: placeholder, ganti dengan screenshot/mockup proyek asli (min. 1600px lebar) -->
+  <rect width="1600" height="900" fill="#4B1590"/>
+  <path d="M-100 700C300 420 640 980 1020 640S1460 380 1700 480" stroke="#6C3BF5" stroke-width="56" stroke-linecap="round"/>
+  <path d="M1100 -60C1180 160 1360 240 1700 190" stroke="#6C3BF5" stroke-width="56" stroke-linecap="round"/>
+  <g transform="translate(420 110)">
+    <rect width="760" height="500" rx="32" fill="#FBF4EE"/>
+    <circle cx="44" cy="40" r="10" fill="#1F1F1F" fill-opacity=".2"/><circle cx="76" cy="40" r="10" fill="#1F1F1F" fill-opacity=".2"/><circle cx="108" cy="40" r="10" fill="#1F1F1F" fill-opacity=".2"/>
+    <rect x="40" y="96" width="680" height="220" rx="24" fill="#C5F73D"/>
+    <rect x="80" y="150" width="340" height="36" rx="18" fill="#1F1F1F" fill-opacity=".85"/>
+    <rect x="80" y="206" width="240" height="20" rx="10" fill="#1F1F1F" fill-opacity=".45"/>
+    <rect x="80" y="250" width="150" height="40" rx="20" fill="#1F1F1F"/>
+    <rect x="40" y="348" width="210" height="112" rx="20" fill="#1F1F1F" fill-opacity=".08"/>
+    <rect x="275" y="348" width="210" height="112" rx="20" fill="#1F1F1F" fill-opacity=".08"/>
+    <rect x="510" y="348" width="210" height="112" rx="20" fill="#1F1F1F" fill-opacity=".08"/>
+  </g>
+</svg>

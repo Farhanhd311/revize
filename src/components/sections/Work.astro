@@ -1,0 +1,162 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+const projects = (await getCollection("portfolio", (p) => p.data.featured)).sort((a, b) => b.data.year - a.data.year);
+---
+
+{projects.length > 0 && (
+<section class="py-20 md:py-32" aria-labelledby="work-title">
+  <div class="mx-auto max-w-7xl px-4 md:px-8">
+    <p class="font-semibold text-violet">Portofolio</p>
+    <h2 id="work-title" class="mt-3 max-w-3xl text-3xl font-bold md:text-5xl">Karya pilihan</h2>
+  </div>
+
+  <div data-carousel role="region" aria-roledescription="carousel" aria-label="Portofolio unggulan" class="group/carousel mt-12">
+    <!-- Native scroll-snap: swipe, trackpad and keyboard scrolling work without JS. Padding centers the first/last slide. -->
+    <ul
+      data-track
+      data-lenis-prevent-horizontal
+      class="relative flex snap-x snap-mandatory gap-3 overflow-x-auto px-[calc((100%-var(--slide))/2)] [--slide:88vw] [scrollbar-width:none] md:gap-4 md:[--slide:min(84vw,1400px)] [&::-webkit-scrollbar]:hidden"
+    >
+      {projects.map((p, i) => (
+        <li
+          data-slide
+          aria-roledescription="slide"
+          aria-label={`${i + 1} dari ${projects.length}`}
+          class="relative w-(--slide) shrink-0 snap-center overflow-hidden rounded-[2rem] bg-ink"
+        >
+          <Image
+            src={p.data.cover}
+            alt={p.data.coverAlt}
+            widths={[640, 960, 1280, 1600]}
+            sizes="(min-width: 768px) min(84vw, 1400px), 88vw"
+            class="aspect-[4/3] w-full object-cover sm:aspect-video" />
+          <!-- mobile: info sits below the image on ink, so contrast never depends on the cover -->
+          <div class="absolute inset-0 hidden bg-linear-to-t from-ink/85 via-ink/20 to-transparent sm:block" aria-hidden="true"></div>
+          {p.data.concept && (
+            <span class="absolute top-5 right-5 rounded-full bg-lime px-4 py-1.5 text-sm font-semibold text-ink md:top-8 md:right-8">
+              Proyek konsep
+            </span>
+          )}
+          <div data-slide-info class="p-6 text-cream sm:absolute sm:inset-x-0 sm:bottom-0 md:p-10 motion-safe:transition-opacity motion-safe:duration-500">
+            <h3 class="text-2xl font-bold md:text-4xl">{p.data.title}</h3>
+            <div class="mt-4 flex flex-col items-start gap-4 md:flex-row md:items-center md:gap-6">
+              <a
+                href={`/portofolio/${p.id}`}
+                class="inline-flex min-h-12 items-center rounded-full bg-cream px-6 font-semibold text-ink hover:bg-lime motion-safe:transition-colors"
+              >
+                Lihat proyek<span class="sr-only">: {p.data.title}</span>
+              </a>
+              <p><span class="font-bold">{p.data.category}</span> · {p.data.summary}</p>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="relative mx-auto mt-6 flex max-w-7xl items-center justify-center px-4 md:px-8">
+      <div class="flex">
+        {projects.map((p) => (
+          <button type="button" data-dot aria-label={`Tampilkan ${p.data.title}`} class="group/dot inline-flex size-11 items-center justify-center">
+            <span class="relative h-2 w-2 overflow-hidden rounded-full bg-ink/25 group-aria-[current=true]/dot:w-10">
+              <span data-dot-fill class="absolute inset-0 origin-left scale-x-0 rounded-full bg-ink"></span>
+            </span>
+          </button>
+        ))}
+      </div>
+      <!-- Autoplay only runs without reduced motion, so the pause control only exists then (WCAG 2.2.2). -->
+      <button
+        type="button"
+        data-toggle
+        aria-label="Jeda putar otomatis"
+        class="absolute right-4 inline-flex size-11 items-center justify-center rounded-full bg-ink/10 hover:bg-ink/20 motion-reduce:hidden md:right-8"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" class="size-4 group-data-paused/carousel:hidden" fill="currentColor">
+          <path d="M7 5h3v14H7zM14 5h3v14h-3z" />
+        </svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24" class="hidden size-4 group-data-paused/carousel:block" fill="currentColor">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+)}
+
+<style>
+  /* neighbors peek in, dimmed, like a showcase reel */
+  [data-slide]:not([data-active]) [data-slide-info] {
+    opacity: 0.35;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  const DURATION = 6; // seconds per slide
+
+  for (const root of document.querySelectorAll<HTMLElement>("[data-carousel]")) {
+    const track = root.querySelector<HTMLElement>("[data-track]")!;
+    const slides = [...root.querySelectorAll<HTMLElement>("[data-slide]")];
+    const dots = [...root.querySelectorAll<HTMLButtonElement>("[data-dot]")];
+    const fills = dots.map((d) => d.querySelector<HTMLElement>("[data-dot-fill]")!);
+    const toggle = root.querySelector<HTMLButtonElement>("[data-toggle]")!;
+    const auto = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let active = -1;
+    let paused = false; // user pressed pause
+    let held = false; // keyboard focus is inside: don't move content away from it
+    let visible = false;
+    let timer: gsap.core.Tween | undefined;
+
+    const center = (s: HTMLElement) => s.offsetLeft + s.offsetWidth / 2;
+    const go = (i: number) =>
+      track.scrollTo({ left: center(slides[i]) - track.clientWidth / 2, behavior: auto ? "smooth" : "auto" });
+    const sync = () => timer?.paused(paused || held || !visible);
+
+    const setActive = (i: number) => {
+      if (i === active) return;
+      active = i;
+      slides.forEach((s, j) => s.toggleAttribute("data-active", j === i));
+      dots.forEach((d, j) => d.setAttribute("aria-current", String(j === i)));
+      timer?.kill();
+      gsap.set(fills, { scaleX: 0 });
+      if (!auto) return void gsap.set(fills[i], { scaleX: 1 });
+      // the dot's progress fill is the autoplay clock
+      timer = gsap.fromTo(fills[i], { scaleX: 0 }, { scaleX: 1, duration: DURATION, ease: "none", onComplete: () => go((i + 1) % slides.length) });
+      sync();
+    };
+
+    track.addEventListener(
+      "scroll",
+      () => {
+        const mid = track.scrollLeft + track.clientWidth / 2;
+        setActive(slides.reduce((best, s, j) => (Math.abs(center(s) - mid) < Math.abs(center(slides[best]) - mid) ? j : best), 0));
+      },
+      { passive: true },
+    );
+    dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
+
+    toggle.addEventListener("click", () => {
+      paused = !paused;
+      root.toggleAttribute("data-paused", paused);
+      toggle.setAttribute("aria-label", paused ? "Putar otomatis" : "Jeda putar otomatis");
+      sync();
+    });
+    root.addEventListener("focusin", (e) => {
+      held = e.target !== toggle && !dots.includes(e.target as HTMLButtonElement);
+      sync();
+    });
+    root.addEventListener("focusout", () => {
+      held = false;
+      sync();
+    });
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      sync();
+    }).observe(root);
+
+    setActive(0);
+  }
+</script>
