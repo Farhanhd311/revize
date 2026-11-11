@@ -30,7 +30,7 @@ Aturan stack:
 - **Default-nya `.astro`.** Pakai React hanya untuk komponen React Bits. Jangan menulis section biasa dalam React.
 - Directive island: `client:visible` untuk efek di bawah layar pertama, `client:load` hanya untuk efek di hero.
 - Tidak memakai `ClientRouter` (view transitions) di MVP.
-- Tidak ada Three.js / WebGL berat di MVP.
+- Tidak ada Three.js di MVP. Pengecualian WebGL: **hanya satu** background shader ringan berbasis OGL, yaitu React Bits `Threads` di hero beranda. Syaratnya: punya fallback statis (SVG garis lengkung) untuk `prefers-reduced-motion` dan saat WebGL tidak tersedia, berhenti merender saat hero tidak terlihat, dan pixel ratio dibatasi maksimal 1.5 di mobile.
 
 ---
 
@@ -67,7 +67,7 @@ Taruh di `src/styles/global.css`:
 ```
 
 Aturan warna (60-30-10):
-- 60% `cream` + `ink` (latar dan teks), 30% `violet` (hero, section penting, footer), 10% `lime` (CTA dan highlight saja).
+- 60% `cream` + `ink` (latar dan teks), 30% `violet` (hero dan section penting), footer memakai `ink`, 10% `lime` (CTA dan highlight saja).
 - Jangan pakai warna di luar token. Jangan memakai palet dari skill UI UX Pro Max; palet di atas sudah final.
 
 Kombinasi teks yang diizinkan:
@@ -106,6 +106,7 @@ Prinsip gerak:
 - Halus dan singkat: durasi 0.6–1.2 detik, easing `power3.out` / `expo.out`. Tidak ada efek memantul berlebihan.
 - Animasi masuk hanya sekali (`once: true`), jangan diulang saat scroll balik.
 - Animasikan `transform` dan `opacity` saja. Jangan animasikan `width`, `height`, `top`, `left`.
+  Pengecualian: buka-tutup FAQ boleh menganimasikan tinggi lewat CSS `interpolate-size` (hanya saat diklik).
 - **Wajib menghormati `prefers-reduced-motion`**: Lenis mati, animasi masuk langsung tampil tanpa transisi.
 - Konten tidak boleh disembunyikan hanya oleh JS. Kalau JS gagal, semua teks tetap terlihat.
 - Batas: **maksimal 3 efek "berat"** (komponen React Bits, efek kursor, background bergerak) di seluruh beranda.
@@ -117,7 +118,7 @@ Prinsip gerak:
 - **ui-ux-pro-max**: untuk keputusan layout, hierarki, spacing, dan aksesibilitas. Palet dan font tetap mengikuti bagian 3.
 - **ponytail**: aktif sepanjang sesi. Tulis kode paling sedikit yang menyelesaikan tugas. Jangan membuat abstraksi, util, atau konfigurasi "untuk nanti". Tapi aksesibilitas, validasi form, dan SEO **bukan** bloat.
 - **GSAP / Lenis**: ikuti pola di bagian 4.
-- **react-bits**: pasang komponen via `npx shadcn@latest add @react-bits/<Nama>-TS-TW`. Pilih varian Tailwind + TypeScript. Sesuaikan warnanya ke token. Cek dependensinya sebelum memasang.
+- **react-bits**: jangan pakai shadcn CLI (project ini tidak memakai `components.json`). Salin source varian TypeScript + Tailwind dari registry `reactbits.dev/r/<Nama>-TS-TW.json` ke `src/components/react/`. Sesuaikan warnanya ke token. Cek dependensinya sebelum memasang. Kalau sebuah komponen membutuhkan `motion` hanya untuk efek sederhana, port ke `.astro` + GSAP/CSS.
 
 Kalau dua skill bertentangan, prioritasnya: **aksesibilitas > performa > PRD > estetika > jumlah kode**.
 

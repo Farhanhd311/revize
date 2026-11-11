@@ -1,0 +1,13 @@
+---
+import CurvedLoop from "../react/CurvedLoop";
+
+const text = "Kuliner · Salon · Laundry · Katering · Bengkel · Toko Online";
+---
+
+<section class="overflow-hidden py-12 text-violet md:py-20">
+  <CurvedLoop client:visible marqueeText={text} separator="·" speed={1.5} curveAmount={160} className="font-display" />
+  <!-- CurvedLoop keeps its text hidden until JS measures it -->
+  <noscript>
+    <p class="px-4 text-center font-display text-2xl font-bold uppercase md:text-4xl">{text}</p>
+  </noscript>
+</section>

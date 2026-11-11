@@ -1,1 +1,34 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@theme {
+  --color-violet: #6C3BF5;   /* warna identitas utama */
+  --color-lime:   #C5F73D;   /* aksen: CTA, highlight */
+  --color-plum:   #4B1590;   /* motif garis, hover, bayangan di atas violet */
+  --color-ink:    #1F1F1F;   /* teks utama, section gelap */
+  --color-cream:  #FBF4EE;   /* latar utama */
+
+  --font-display: "Unbounded Variable", sans-serif;
+  --font-sans:    "Manrope Variable", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-cream text-ink antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
+  }
+
+  /* currentColor keeps the ring visible on every background (cream, violet, ink, lime) */
+  :focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  /* lock page scroll behind the mobile menu dialog */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+}

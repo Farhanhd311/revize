@@ -1,0 +1,46 @@
+---
+import Button from "../layout/Button.astro";
+import Magnet from "../react/Magnet";
+import { waLink } from "../../config";
+---
+
+<section data-cta class="bg-lime text-ink">
+  <div class="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-32">
+    <h2 data-cta-title class="max-w-5xl text-4xl leading-[1.05] font-bold md:text-7xl">Siap bikin usaha Anda tampil beda?</h2>
+    <p data-cta-fade class="mt-6 max-w-xl text-lg md:text-xl">
+      Konsultasi gratis, tanpa komitmen. Ceritakan usaha Anda, kami bantu cari solusi yang pas.
+    </p>
+    <div data-cta-fade class="mt-10">
+      <Magnet client:visible padding={60} magnetStrength={3}>
+        <Button
+          variant="ink"
+          href={waLink("Halo Revize, saya mau konsultasi gratis.")}
+          target="_blank"
+          rel="noopener"
+          class="min-h-14 px-8 text-lg"
+        >
+          Konsultasi via WhatsApp
+        </Button>
+      </Magnet>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  // Same pattern as the hero, but scroll-triggered. No anti-flash guard needed: the section is off-screen at load.
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.fonts.ready.then(() => {
+      const split = SplitText.create("[data-cta-title]", { type: "words", mask: "words" });
+      gsap
+        .timeline({ scrollTrigger: { trigger: "[data-cta]", start: "top 75%", once: true }, defaults: { ease: "expo.out" } })
+        .from(split.words, { yPercent: 110, duration: 1, stagger: 0.06 })
+        .from("[data-cta-fade]", { y: 24, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" }, 0.3);
+    });
+  }
+</script>

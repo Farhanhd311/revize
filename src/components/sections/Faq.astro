@@ -1,0 +1,74 @@
+---
+// TODO: semua jawaban masih draf netral (tanpa angka/janji). Ganti dengan jawaban final dari pemilik.
+const faqs = [
+  {
+    q: "Berapa biaya pembuatan website?",
+    a: "Tergantung layanan dan kebutuhan. Setelah konsultasi gratis, kami kirim penawaran tertulis dengan harga yang jelas sebelum mulai.",
+  },
+  {
+    q: "Berapa lama pengerjaannya?",
+    a: "Tergantung paket dan kelengkapan materi. Perkiraan waktunya kami sepakati di awal.",
+  },
+  {
+    q: "Apakah sudah termasuk domain dan hosting?",
+    a: "Rincian apa saja yang termasuk tercantum di setiap paket. Tanyakan saat konsultasi.",
+  },
+  {
+    q: "Apakah saya bisa mengubah isi website sendiri?",
+    a: "Bisa didiskusikan sesuai kebutuhan. Kami jelaskan pilihannya saat konsultasi.",
+  },
+  {
+    q: "Bagaimana sistem pembayarannya?",
+    a: "Skema pembayaran dijelaskan di penawaran sebelum pekerjaan dimulai.",
+  },
+  {
+    // TODO: tergantung pertanyaan terbuka PRD no. 3 (branding masuk MVP atau tidak).
+    q: "Saya belum punya logo, apakah bisa?",
+    a: "Bisa. Ceritakan kebutuhan Anda, kami bantu sampai identitas brand-nya siap.",
+  },
+];
+---
+
+<section class="mx-auto max-w-3xl px-4 py-20 md:py-32">
+  <p class="font-semibold text-violet">FAQ</p>
+  <h2 class="mt-3 text-3xl font-bold md:text-5xl">Pertanyaan yang sering ditanyakan</h2>
+
+  <div class="mt-12 divide-y divide-ink/15 border-y border-ink/15">
+    {faqs.map((f) => (
+      <details class="group">
+        <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 py-5 text-lg font-bold [&::-webkit-details-marker]:hidden">
+          {f.q}
+          <span class="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-violet text-cream group-open:rotate-45 motion-safe:transition-transform" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </span>
+        </summary>
+        <p class="pb-6 text-ink/80">{f.a}</p>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* Exception to the transform/opacity rule (CLAUDE.md §4): click-only height animation.
+     Browsers without ::details-content or interpolate-size just open/close natively. */
+  details {
+    interpolate-size: allow-keywords;
+  }
+  details::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size 0.4s ease,
+      content-visibility 0.4s allow-discrete;
+  }
+  details[open]::details-content {
+    block-size: auto;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    details::details-content {
+      transition: none;
+    }
+  }
+</style>

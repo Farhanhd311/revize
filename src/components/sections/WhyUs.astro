@@ -1,0 +1,40 @@
+---
+import VariableProximity from "../react/VariableProximity";
+
+const points = [
+  { title: "Harga jelas di depan", body: "Anda tahu biayanya sebelum kami mulai, tanpa biaya tersembunyi." },
+  // TODO: ganti dengan "Selesai dalam X hari" setelah angkanya final.
+  { title: "Jadwal jelas", body: "Perkiraan waktu pengerjaan disepakati sejak awal." },
+  { title: "Mobile-first", body: "Dirancang untuk ponsel dulu, karena di situlah pelanggan Anda mencari." },
+  // TODO: tambahkan detail masa dukungan setelah final.
+  { title: "Dukungan setelah online", body: "Kami tidak menghilang setelah website tayang." },
+];
+---
+
+<section class="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-32">
+  <p class="font-semibold text-violet">Kenapa Revize</p>
+  <!-- Only hydrated with a mouse and no reduced motion; otherwise the server-rendered text stays static. -->
+  <h2 class="mt-4 max-w-5xl text-3xl leading-tight font-medium md:text-6xl">
+    <VariableProximity
+      client:media="(pointer: fine) and (prefers-reduced-motion: no-preference)"
+      label="Website yang bikin pelanggan percaya, tanpa bikin Anda pusing."
+      fromFontVariationSettings="'wght' 500"
+      toFontVariationSettings="'wght' 900"
+      radius={140}
+    />
+  </h2>
+
+  <ul class="mt-16 grid gap-10 md:grid-cols-2 xl:grid-cols-4">
+    {points.map((p) => (
+      <li class="border-t-2 border-ink pt-6">
+        <span class="inline-flex size-10 items-center justify-center rounded-full bg-lime text-ink" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.5l4.5 4.5L19 7.5" />
+          </svg>
+        </span>
+        <h3 class="mt-4 text-xl font-bold">{p.title}</h3>
+        <p class="mt-2 text-ink/80">{p.body}</p>
+      </li>
+    ))}
+  </ul>
+</section>

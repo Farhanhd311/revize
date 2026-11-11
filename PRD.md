@@ -206,8 +206,18 @@ summary: "Satu kalimat ringkasan"
 - Hero: judul muncul per kata (GSAP SplitText), tombol menyusul.
 - Section: konten naik pelan dan muncul saat masuk layar, sekali saja.
 - Motif garis lengkung: bergerak/tergambar perlahan mengikuti scroll (stroke-dashoffset).
+- Proses kerja: garis lengkung lime menghubungkan 4 langkah, tergambar mengikuti scroll (GSAP ScrollTrigger scrub + stroke-dashoffset); setiap langkah muncul sekali saat garis mencapainya.
+- CTA penutup: judul muncul per kata (GSAP SplitText, pola sama dengan hero).
+- FAQ: `<details>` native, buka-tutup halus lewat CSS `interpolate-size`, ikon plus berputar jadi silang.
 - Smooth scroll Lenis di seluruh halaman.
-- Kandidat efek React Bits (pilih maksimal 3): animasi teks untuk judul section, tombol magnetik untuk CTA utama, teks berjalan dengan kecepatan mengikuti scroll untuk marquee.
+- Efek React Bits yang dipakai di beranda:
+  - **Threads** (efek berat #1): background hero berupa garis lengkung mengalir, warna plum dan lime di atas violet, bereaksi pada mouse. Fallback: SVG garis lengkung statis.
+  - **CurvedLoop** (efek berat #2): marquee teks di jalur melengkung, berisi jenis usaha yang dilayani.
+  - **CircularText** (ringan): lencana berputar "REVIZE • CREATIVE AGENCY •" di hero.
+  - **Magnet** (ringan): tombol CTA utama di hero dan tombol WhatsApp di CTA penutup.
+  - **ScrollReveal** (ringan): judul section Layanan.
+  - **VariableProximity** (ringan): kalimat besar di section Kenapa kami, memakai Unbounded Variable (sumbu `wght`). Hanya aktif di `pointer: fine`; di mobile dan reduced motion teks tampil statis.
+- Slot efek berat #3 sengaja dikosongkan untuk Portofolio unggulan di Tahap 4.
 
 ---
 
@@ -228,8 +238,8 @@ Stack lengkap dan aturan kode ada di `CLAUDE.md`. Ringkasnya: Astro + Tailwind C
 | ----- | ------------------------------------------------------------------------------------- | ---------------------------------------------- |
 | 1     | Setup project, token desain, font, BaseLayout, Header, Footer, `motion.ts`            | Build lolos, header/footer rapi di 3 ukuran    |
 | 2     | Beranda: Hero + Marquee + Layanan                                                     | Animasi hero jalan, reduced motion dihormati   |
-| 3     | Beranda: Portofolio unggulan, Proses, Kenapa kami, FAQ, CTA                           | Beranda lengkap, Lighthouse mobile ≥ 90        |
-| 4     | Content Collections + halaman Portofolio (daftar dan detail)                          | Proyek baru cukup lewat file Markdown          |
+| 3     | Beranda: Proses, Kenapa kami, FAQ, CTA penutup (Testimoni disembunyikan sampai ada testimoni asli) | Lighthouse mobile ≥ 90             |
+| 4     | Content Collections + Portofolio unggulan di beranda + halaman Portofolio (daftar dan detail) | Beranda lengkap, proyek baru cukup lewat file Markdown |
 | 5     | Halaman Layanan, Tentang, Kontak (form + WhatsApp), 404                               | Form terkirim, semua tombol WA benar           |
 | 6     | SEO (meta, OG, sitemap, JSON-LD), analitik, uji aksesibilitas dan lintas perangkat    | Semua target di bagian 4 tercapai              |
 | 7     | Deploy, sambungkan domain, daftarkan ke Google Search Console                         | Website online di domain sendiri               |

@@ -1,16 +1,24 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/sections/Hero.astro";
+import Marquee from "../components/sections/Marquee.astro";
+import Services from "../components/sections/Services.astro";
+import Process from "../components/sections/Process.astro";
+import WhyUs from "../components/sections/WhyUs.astro";
+import Faq from "../components/sections/Faq.astro";
+import ClosingCta from "../components/sections/ClosingCta.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Revize — Jasa Website & Branding untuk UMKM"
+  description="Revize membuat website dan identitas brand untuk UMKM: harga jelas, cepat online, dan tampil profesional di ponsel."
+  headerTone="dark"
+>
+  <Hero />
+  <Marquee />
+  <Services />
+  <Process />
+  <WhyUs />
+  <Faq />
+  <ClosingCta />
+</BaseLayout>

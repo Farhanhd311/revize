@@ -1,0 +1,105 @@
+---
+// TODO: konfirmasi durasi tiap langkah dengan pemilik (angka di bawah masih draf).
+const steps = [
+  {
+    title: "Konsultasi",
+    body: "Ceritakan usaha dan kebutuhan Anda lewat WhatsApp, kami bantu pilih paket yang pas.",
+    duration: "± 1 hari",
+  },
+  {
+    title: "Desain",
+    body: "Kami buat desain tampilan, Anda review dan minta revisi.",
+    duration: "± 3–5 hari",
+  },
+  {
+    title: "Pengembangan",
+    body: "Desain yang disetujui kami bangun jadi website yang cepat dan rapi di ponsel.",
+    duration: "± 5–10 hari",
+  },
+  {
+    title: "Online & dukungan",
+    body: "Website tayang di domain Anda, dan kami tetap siap membantu setelahnya.",
+    duration: "Setelah peluncuran",
+  },
+];
+---
+
+<section class="bg-violet text-cream">
+  <div class="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-32">
+    <p class="font-semibold">Proses kerja</p>
+    <h2 class="mt-3 max-w-3xl text-3xl font-bold md:text-5xl">Dari obrolan sampai online, tanpa ribet</h2>
+
+    <ol data-steps class="relative mt-16 grid auto-rows-fr md:grid-cols-4">
+      <svg class="pointer-events-none absolute inset-0 size-full overflow-visible" fill="none" aria-hidden="true">
+        <path data-steps-line pathLength="1" class="stroke-lime" stroke-width="6" stroke-linecap="round" />
+      </svg>
+      {steps.map((step, i) => (
+        <li data-step class="relative z-10 flex items-center gap-5 py-6 md:flex-col md:px-4 md:py-0 md:text-center">
+          <span data-step-dot class="flex size-16 shrink-0 items-center justify-center rounded-full bg-lime font-display text-xl font-bold text-ink">
+            0{i + 1}
+          </span>
+          <div>
+            <h3 class="text-xl font-bold">{step.title}</h3>
+            <p class="mt-2">{step.body}</p>
+            <p class="mt-3 inline-flex rounded-full border border-cream/40 px-3 py-1 text-sm font-semibold">{step.duration}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const list = document.querySelector<HTMLElement>("[data-steps]")!;
+  const svg = list.querySelector("svg")!;
+  const path = list.querySelector<SVGPathElement>("[data-steps-line]")!;
+  const steps = [...list.querySelectorAll<HTMLElement>("[data-step]")];
+
+  // Curve through the real dot centers, bending to alternate sides, so one path fits the
+  // vertical (mobile) and horizontal (desktop) layout. offset* ignores the GSAP y transform.
+  const draw = () => {
+    svg.setAttribute("viewBox", `0 0 ${list.offsetWidth} ${list.offsetHeight}`);
+    const points = steps.map((step) => {
+      const dot = step.querySelector<HTMLElement>("[data-step-dot]")!;
+      return [step.offsetLeft + dot.offsetLeft + dot.offsetWidth / 2, step.offsetTop + dot.offsetTop + dot.offsetHeight / 2];
+    });
+    let d = `M${points[0]}`;
+    for (let i = 1; i < points.length; i++) {
+      const [ax, ay] = points[i - 1];
+      const [bx, by] = points[i];
+      const dx = bx - ax;
+      const dy = by - ay;
+      const len = Math.hypot(dx, dy) || 1;
+      const amp = Math.min(len * 0.3, 48) * (i % 2 ? 1 : -1);
+      const nx = (-dy / len) * amp;
+      const ny = (dx / len) * amp;
+      d += ` C${ax + dx / 3 + nx},${ay + dy / 3 + ny} ${ax + (2 * dx) / 3 - nx},${ay + (2 * dy) / 3 - ny} ${bx},${by}`;
+    }
+    path.setAttribute("d", d);
+  };
+  new ResizeObserver(draw).observe(list);
+
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.set(path, { strokeDasharray: 1, strokeDashoffset: 1 });
+    gsap.set(steps, { opacity: 0, y: 24 });
+
+    // The line scrubs both ways; each step appears once when the line reaches it and stays.
+    const reveal = ({ progress }: ScrollTrigger) =>
+      steps.forEach((step, i) => {
+        if (step.dataset.shown !== undefined || progress <= 0 || progress < i / (steps.length - 1) - 0.02) return;
+        step.dataset.shown = "";
+        gsap.to(step, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" });
+      });
+
+    gsap.to(path, {
+      strokeDashoffset: 0,
+      ease: "none",
+      scrollTrigger: { trigger: list, start: "top 75%", end: "bottom 60%", scrub: true, onUpdate: reveal, onRefresh: reveal },
+    });
+  }
+</script>

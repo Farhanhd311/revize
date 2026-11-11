@@ -1,0 +1,102 @@
+---
+import Button from "../layout/Button.astro";
+import CircularText from "../CircularText.astro";
+import Magnet from "../react/Magnet";
+import Threads from "../react/Threads";
+import { waLink } from "../../config";
+---
+
+<!-- Runs before the hero is parsed so the title never flashes before GSAP hides it -->
+<script is:inline>
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");
+</script>
+
+<section class="group relative isolate flex min-h-dvh items-center overflow-hidden bg-violet pt-28 pb-20 text-cream md:pt-36">
+  <div class="absolute inset-0 -z-10" aria-hidden="true">
+    <!-- Static fallback: shown for reduced motion, no WebGL2, or no JS. Hidden once Threads sets data-ready. -->
+    <svg
+      class="absolute inset-0 size-full text-plum group-has-[[data-ready]]:hidden"
+      viewBox="0 0 1440 900"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="44"
+      stroke-linecap="round"
+    >
+      <path d="M-120 720C260 420 640 1020 1000 640S1400 360 1560 470" />
+      <path d="M-120 860C320 600 700 1120 1080 780S1440 560 1560 640" />
+      <path d="M860 -80C980 180 1180 260 1560 200" />
+    </svg>
+    <!-- color/accentColor = plum/lime tokens; canvas can't read CSS vars -->
+    <Threads
+      client:media="(prefers-reduced-motion: no-preference)"
+      color="#4B1590"
+      accentColor="#C5F73D"
+      enableMouseInteraction
+    />
+  </div>
+
+  <div class="mx-auto w-full max-w-7xl px-4 md:px-8">
+    <p data-hero-in data-hero-fade class="inline-flex rounded-full border-2 border-cream/40 px-4 py-1.5 text-sm font-semibold">
+      Creative agency untuk UMKM
+    </p>
+
+    <h1 data-hero-in data-hero-title class="mt-6 max-w-5xl text-[2.5rem] leading-[1.05] font-bold sm:text-5xl md:text-7xl xl:text-8xl">
+      Brand yang <span class="text-lime">berani</span>, website yang diingat.
+    </h1>
+
+    <p data-hero-in data-hero-fade class="mt-6 max-w-xl text-lg text-cream/90 md:text-xl">
+      Kami bantu UMKM punya website dan identitas brand yang profesional, cepat online, dengan harga yang jelas sejak awal.
+    </p>
+
+    <div data-hero-in data-hero-fade class="mt-10 flex flex-wrap items-center gap-4">
+      <Magnet client:load padding={60} magnetStrength={3}>
+        <Button
+          href={waLink("Halo Revize, saya mau mulai proyek website untuk usaha saya.")}
+          target="_blank"
+          rel="noopener"
+          class="min-h-14 px-8 text-lg"
+        >
+          Mulai proyek
+        </Button>
+      </Magnet>
+      <Button variant="outline" href="/portofolio" class="min-h-14 px-8 text-lg">Lihat portofolio</Button>
+      <CircularText text="REVIZE • CREATIVE AGENCY • " size={112} class="ml-2 text-cream">
+        <svg viewBox="0 0 24 24" class="size-6 text-lime" fill="currentColor">
+          <path d="M12 2l2.4 7.6H22l-6.2 4.6 2.4 7.6-6.2-4.7-6.2 4.7 2.4-7.6L2 9.6h7.6z" />
+        </svg>
+      </CircularText>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Hide until GSAP takes over; the delayed animation reveals it anyway if the module script never runs. */
+  :global(.motion) [data-hero-in] {
+    visibility: hidden;
+    animation: hero-show 0s 2.5s forwards;
+  }
+  @keyframes hero-show {
+    to {
+      visibility: visible;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin(SplitText);
+
+  if (document.documentElement.classList.contains("motion")) {
+    document.fonts.ready.then(() => {
+      const split = SplitText.create("[data-hero-title]", { type: "words", mask: "words" });
+      gsap.set("[data-hero-in]", { visibility: "visible" });
+      gsap
+        .timeline({ defaults: { ease: "expo.out" } })
+        .from(split.words, { yPercent: 110, duration: 1, stagger: 0.06 })
+        .from("[data-hero-fade]", { y: 24, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" }, 0.3);
+    });
+  }
+</script>
