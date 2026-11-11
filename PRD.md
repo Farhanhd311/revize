@@ -218,6 +218,11 @@ summary: "Satu kalimat ringkasan"
   - **ScrollReveal** (ringan): judul section Layanan.
   - **VariableProximity** (ringan): kalimat besar di section Kenapa kami, memakai Unbounded Variable (sumbu `wght`). Hanya aktif di `pointer: fine`; di mobile dan reduced motion teks tampil statis.
 - Slot efek berat #3 sengaja dikosongkan untuk Portofolio unggulan di Tahap 4.
+- Efek global (ringan, semua halaman, `.astro` + GSAP, tidak dihitung sebagai efek berat):
+  - **Progress bar scroll**: garis lime 3px di paling atas layar, lebar mengikuti progres scroll (ScrollTrigger, `scaleX`). Reduced motion: disembunyikan.
+  - **Kursor kustom**: lingkaran kecil yang mengikuti kursor dengan sedikit jeda (`gsap.quickTo`), membesar dan berubah lime di atas link/tombol. Kursor asli tetap ada. Hanya aktif di `pointer: fine` tanpa reduced motion. Ringan karena hanya satu elemen DOM, tanpa canvas/WebGL.
+  - **Tombol WhatsApp mengambang** (F-06): bulat lime 56px di pojok kanan bawah, hanya di mobile, muncul setelah hero lewat dan hilang saat CTA penutup atau footer terlihat. Reduced motion: tetap berfungsi, tanpa transisi.
+  - **Wordmark footer**: "REVIZE" raksasa selebar container, cream opacity rendah, naik perlahan saat footer masuk layar. Reduced motion: langsung tampil.
 
 ---
 

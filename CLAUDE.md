@@ -109,7 +109,7 @@ Prinsip gerak:
   Pengecualian: buka-tutup FAQ boleh menganimasikan tinggi lewat CSS `interpolate-size` (hanya saat diklik).
 - **Wajib menghormati `prefers-reduced-motion`**: Lenis mati, animasi masuk langsung tampil tanpa transisi.
 - Konten tidak boleh disembunyikan hanya oleh JS. Kalau JS gagal, semua teks tetap terlihat.
-- Batas: **maksimal 3 efek "berat"** (komponen React Bits, efek kursor, background bergerak) di seluruh beranda.
+- Batas: **maksimal 3 efek "berat"** (komponen React Bits, efek kursor berbasis canvas/WebGL, background bergerak) di seluruh beranda.
 
 ---
 

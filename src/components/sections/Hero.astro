@@ -11,7 +11,7 @@ import { waLink } from "../../config";
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");
 </script>
 
-<section class="group relative isolate flex min-h-dvh items-center overflow-hidden bg-violet pt-28 pb-20 text-cream md:pt-36">
+<section class="group relative isolate flex min-h-dvh items-center overflow-hidden bg-violet pt-24 pb-12 text-cream sm:pt-28 sm:pb-20 md:pt-36">
   <div class="absolute inset-0 -z-10" aria-hidden="true">
     <!-- Static fallback: shown for reduced motion, no WebGL2, or no JS. Hidden once Threads sets data-ready. -->
     <svg
@@ -41,27 +41,30 @@ import { waLink } from "../../config";
       Creative agency untuk UMKM
     </p>
 
-    <h1 data-hero-in data-hero-title class="mt-6 max-w-5xl text-[2.5rem] leading-[1.05] font-bold sm:text-5xl md:text-7xl xl:text-8xl">
+    <h1 data-hero-in data-hero-title class="mt-4 max-w-5xl text-[2.5rem] leading-[1.05] font-bold sm:mt-6 sm:text-5xl md:text-7xl xl:text-8xl">
       Brand yang <span class="text-lime">berani</span>, website yang diingat.
     </h1>
 
-    <p data-hero-in data-hero-fade class="mt-6 max-w-xl text-lg text-cream/90 md:text-xl">
+    <p data-hero-in data-hero-fade class="mt-4 max-w-xl text-lg text-cream/90 sm:mt-6 md:text-xl">
       Kami bantu UMKM punya website dan identitas brand yang profesional, cepat online, dengan harga yang jelas sejak awal.
     </p>
 
-    <div data-hero-in data-hero-fade class="mt-10 flex flex-wrap items-center gap-4">
+    <div data-hero-in data-hero-fade class="mt-6 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
       <Magnet client:load padding={60} magnetStrength={3}>
         <Button
           href={waLink("Halo Revize, saya mau mulai proyek website untuk usaha saya.")}
           target="_blank"
           rel="noopener"
-          class="min-h-14 px-8 text-lg"
+          class="min-h-14 w-full gap-2 px-8 text-lg sm:w-auto"
         >
           Mulai proyek
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5 sm:hidden" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
         </Button>
       </Magnet>
-      <Button variant="outline" href="/portofolio" class="min-h-14 px-8 text-lg">Lihat portofolio</Button>
-      <CircularText text="REVIZE • CREATIVE AGENCY • " size={112} class="ml-2 text-cream">
+      <Button variant="outline" href="/portofolio" class="min-h-14 w-full px-8 text-lg sm:w-auto">Lihat portofolio</Button>
+      <CircularText text="REVIZE • CREATIVE AGENCY • " size={112} class="ml-2 text-cream max-sm:hidden">
         <svg viewBox="0 0 24 24" class="size-6 text-lime" fill="currentColor">
           <path d="M12 2l2.4 7.6H22l-6.2 4.6 2.4 7.6-6.2-4.7-6.2 4.7 2.4-7.6L2 9.6h7.6z" />
         </svg>

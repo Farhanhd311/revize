@@ -33,4 +33,29 @@ const link = "inline-flex min-h-11 items-center hover:text-lime motion-safe:tran
   <div class="border-t border-cream/15">
     <p class="mx-auto max-w-7xl px-4 py-6 text-sm text-cream/70 md:px-8">© {new Date().getFullYear()} {site.name}. Hak cipta dilindungi.</p>
   </div>
+
+  <!-- textLength stretches the word to exactly the container width, so it can never cause horizontal scroll -->
+  <div class="mx-auto max-w-7xl overflow-hidden px-4 md:px-8">
+    <svg data-wordmark aria-hidden="true" viewBox="0 0 1000 168" class="block w-full fill-cream/10">
+      <!-- font-size 220 ≈ 1000 units wide in Unbounded Bold (cap height ≈ 166), so textLength barely distorts it -->
+      <text x="0" y="167" font-size="220" textLength="1000" lengthAdjust="spacingAndGlyphs" class="font-display font-bold">REVIZE</text>
+    </svg>
+  </div>
 </footer>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.from("[data-wordmark]", {
+      yPercent: 40,
+      opacity: 0,
+      duration: 1.2,
+      ease: "expo.out",
+      scrollTrigger: { trigger: "footer", start: "top 80%", once: true },
+    });
+  }
+</script>
