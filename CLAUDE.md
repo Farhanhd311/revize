@@ -153,3 +153,20 @@ public/            favicon, og-image, gambar statis
 - Teks yang belum final ditandai `TODO:`. Jangan mengarang testimoni, nama klien, logo klien, atau angka statistik. Proyek konsep wajib diberi label "Proyek konsep".
 - Nomor WhatsApp, email, dan kunci Web3Forms diambil dari `src/config.ts` (bukan di-hardcode di banyak tempat). Kunci Web3Forms lewat env `PUBLIC_WEB3FORMS_KEY`.
 - Jangan menghapus atau menulis ulang section yang tidak diminta.
+
+---
+
+## 8. Gaya bahasa
+
+Pembaca utama: pemilik UMKM yang awam teknologi. Sumber istilah, perumpamaan, dan nama paket
+(Start, Profil, Katalog, Custom): bagian "Penjelasan paket untuk orang awam" di `LAYANAN.md`.
+
+1. Jual hasil, bukan teknis. "SEO" → "lebih mudah ditemukan di Google", "responsif" → "tampil rapi di HP",
+   "hosting & domain" → "alamat website sendiri", "CMS/dashboard" → "ganti harga dan foto sendiri lewat HP",
+   "maintenance" → "kami jaga website Anda tetap jalan dan aman".
+2. Istilah yang dicari di Google ("jasa pembuatan website", "landing page", "company profile", "toko online")
+   tetap dipakai, tapi selalu diberi penjelasan singkat di dekatnya, misalnya "Landing page (website satu halaman)".
+3. Kalimat pendek, satu ide per kalimat, maksimal sekitar 20 kata.
+4. Pakai contoh jenis usaha nyata: katering, salon, bengkel, laundry, toko kue.
+5. Sapaan "Anda", nada ramah dan jelas, tanpa janji berlebihan (tidak ada "pasti halaman 1 Google" atau "dijamin laris").
+6. Jangan mencantumkan harga sampai harga di `LAYANAN.md` final.

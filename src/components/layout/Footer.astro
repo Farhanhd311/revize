@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import { nav, site, waLink } from "../../config";
+import logo from "../../assets/brand/logo.png";
 
 const link = "inline-flex min-h-11 items-center hover:text-lime motion-safe:transition-colors";
 ---
@@ -7,9 +9,10 @@ const link = "inline-flex min-h-11 items-center hover:text-lime motion-safe:tran
 <footer class="bg-ink text-cream">
   <div class="mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-3 md:px-8">
     <div>
-      <!-- TODO: ganti wordmark teks dengan logo SVG Revize -->
-      <a href="/" class="font-display text-2xl font-bold tracking-tight">{site.name}</a>
-      <p class="mt-4 max-w-xs text-cream/80">Website dan identitas brand untuk UMKM yang ingin tampil berani dan mudah ditemukan.</p>
+      <a href="/" class="inline-flex min-h-11 items-center">
+        <Image src={logo} alt={site.name} width={160} densities={[1, 2]} class="h-14 w-auto" />
+      </a>
+      <p class="mt-4 max-w-xs text-cream/80">Jasa pembuatan website untuk UMKM. Tampil rapi di HP dan lebih mudah ditemukan di Google.</p>
     </div>
 
     <nav aria-label="Menu footer">
@@ -34,12 +37,16 @@ const link = "inline-flex min-h-11 items-center hover:text-lime motion-safe:tran
     <p class="mx-auto max-w-7xl px-4 py-6 text-sm text-cream/70 md:px-8">© {new Date().getFullYear()} {site.name}. Hak cipta dilindungi.</p>
   </div>
 
-  <!-- textLength stretches the word to exactly the container width, so it can never cause horizontal scroll -->
-  <div class="mx-auto max-w-7xl overflow-hidden px-4 md:px-8">
-    <svg data-wordmark aria-hidden="true" viewBox="0 0 1000 168" class="block w-full fill-cream/10">
-      <!-- font-size 220 ≈ 1000 units wide in Unbounded Bold (cap height ≈ 166), so textLength barely distorts it -->
-      <text x="0" y="167" font-size="220" textLength="1000" lengthAdjust="spacingAndGlyphs" class="font-display font-bold">REVIZE</text>
-    </svg>
+  <!-- Full-width logo as the closing sign-off; decorative, the footer logo above carries the name -->
+  <div class="mx-auto max-w-7xl overflow-hidden px-4 pb-8 md:px-8">
+    <Image
+      data-wordmark
+      src={logo}
+      alt=""
+      widths={[640, 1280, 2434]}
+      sizes="(min-width: 1280px) 1216px, calc(100vw - 2rem)"
+      class="block h-auto w-full"
+    />
   </div>
 </footer>
 

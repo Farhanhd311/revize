@@ -1,0 +1,103 @@
+/* Shared base for Instagram designs. Not part of the Astro build. */
+
+/* Static weights (not the site's variable fonts): Chromium embeds variable fonts in PDFs as
+   Type3 glyphs, which Canva can't edit. Static files embed as real TrueType fonts. */
+@font-face { font-family: "Unbounded"; font-weight: 700; src: url("../node_modules/@fontsource/unbounded/files/unbounded-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Unbounded"; font-weight: 800; src: url("../node_modules/@fontsource/unbounded/files/unbounded-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 500; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 600; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 700; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 800; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-800-normal.woff2") format("woff2"); }
+
+/* Mirror of @theme in src/styles/global.css; export.mjs fails if they drift. */
+:root {
+  --color-violet: #6C3BF5;
+  --color-lime:   #C5F73D;
+  --color-plum:   #4B1590;
+  --color-ink:    #1F1F1F;
+  --color-cream:  #FBF4EE;
+
+  --font-display: "Unbounded", sans-serif;
+  --font-sans:    "Manrope", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* One Instagram 4:5 artboard. 100px safe area keeps text clear of grid crops. */
+.post {
+  position: relative;
+  isolation: isolate;
+  flex: none;
+  width: 1080px;
+  height: 1350px;
+  padding: 100px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* PDF export: one 1080×1350 page per .post, no margin, backgrounds kept. */
+@page { margin: 0; } /* page size is set in export.mjs */
+@media print {
+  body { display: block !important; width: auto !important; print-color-adjust: exact; }
+  .post + .post { break-before: page; }
+}
+
+/* Decorative layer: may bleed past the safe area and the edges. */
+.art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 44px;
+  letter-spacing: -0.04em;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  width: fit-content;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  padding: 18px 32px;
+}
+.pill.outline { border: 3px solid currentColor; }
+
+.cta {
+  font-size: 36px;
+  font-weight: 800;
+  padding: 30px 44px;
+}
+
+.body {
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-wrap: pretty;
+}

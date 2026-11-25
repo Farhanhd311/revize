@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Carousel: Kenapa UMKM butuh website</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* Slides sit side by side so the shared thread reads as one line in the browser. */
+  body { display: flex; width: max-content; }
+  .art { color: var(--color-plum); }
+  header { display: flex; justify-content: space-between; align-items: center; }
+  .count { font-size: 32px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  .violet { background: var(--color-violet); color: var(--color-cream); }
+  .cream  { background: var(--color-cream);  color: var(--color-ink); }
+  .lime   { background: var(--color-lime);   color: var(--color-ink); }
+
+  .hook h1 { font-size: 100px; margin-top: 40px; }
+  .hook em { font-style: normal; color: var(--color-lime); }
+  .hook .content { margin-top: 150px; }
+
+  .point { margin-top: 140px; }
+  .point h2 { font-size: 80px; margin-top: 32px; }
+  .point .solusi { margin-top: 72px; background: var(--color-lime); }
+  .point .body { margin-top: 28px; font-size: 40px; max-width: 860px; }
+
+  .closing h2 { font-size: 104px; margin-top: 150px; }
+  .closing .body { margin-top: 36px; }
+  .closing .cta { margin-top: 64px; background: var(--color-ink); color: var(--color-cream); }
+  .closing .handle { margin-top: 48px; font-size: 32px; font-weight: 600; line-height: 1.4; }
+  .closing .handle b { display: block; font-family: var(--font-display); font-size: 44px; letter-spacing: -0.03em; }
+</style>
+</head>
+<body>
+<!-- One thread drawn across a 5400×1350 strip; each slide shows its 1080px window of it. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <path id="thread" d="
+    M-120 1260
+    C 260 1060, 620 1400, 1080 1180
+    S 1700 1060, 2160 1230
+    S 2560 1380, 2760 1250
+    C 2880 1160, 2790 1080, 2690 1130
+    C 2570 1200, 2700 1360, 3240 1220
+    S 3900 1060, 4320 1240
+    S 4900 1320, 5060 1160" />
+</svg>
+
+<section class="post violet hook">
+  <svg class="art" viewBox="0 0 1080 1350" stroke-width="56" aria-hidden="true"><use href="#thread"/></svg>
+  <header><span class="wordmark">Revize</span><span class="count">1 / 5</span></header>
+  <div class="content">
+    <span class="pill outline">Untuk pemilik UMKM</span>
+    <h1 class="display">Dicari di Google, yang muncul malah <em>kompetitor</em>?</h1>
+    <span class="pill outline" style="margin-top:64px">Geser untuk tahu kenapa</span>
+  </div>
+</section>
+
+<section class="post cream">
+  <svg class="art" viewBox="1080 0 1080 1350" stroke-width="56" aria-hidden="true"><use href="#thread"/></svg>
+  <header><span class="wordmark">Revize</span><span class="count">2 / 5</span></header>
+  <div class="point">
+    <span class="pill outline">Masalah</span>
+    <h2 class="display">Usahamu susah ditemukan di Google.</h2>
+    <span class="pill solusi">Solusi</span>
+    <p class="body">Website membuat usahamu muncul saat orang mencari, misalnya “katering dekat sini”.</p>
+  </div>
+</section>
+
+<section class="post cream">
+  <svg class="art" viewBox="2160 0 1080 1350" stroke-width="56" aria-hidden="true"><use href="#thread"/></svg>
+  <header><span class="wordmark">Revize</span><span class="count">3 / 5</span></header>
+  <div class="point">
+    <span class="pill outline">Masalah</span>
+    <h2 class="display">Info harga dan layanan tersebar di chat.</h2>
+    <span class="pill solusi">Solusi</span>
+    <p class="body">Satu tautan berisi layanan, harga, dan lokasi. Pelanggan baca sendiri, kamu hemat waktu balas chat.</p>
+  </div>
+</section>
+
+<section class="post cream">
+  <svg class="art" viewBox="3240 0 1080 1350" stroke-width="56" aria-hidden="true"><use href="#thread"/></svg>
+  <header><span class="wordmark">Revize</span><span class="count">4 / 5</span></header>
+  <div class="point">
+    <span class="pill outline">Masalah</span>
+    <h2 class="display">Akun media sosial saja belum cukup meyakinkan.</h2>
+    <span class="pill solusi">Solusi</span>
+    <p class="body">Website dengan nama domain sendiri terlihat profesional dan membuat calon pelanggan lebih yakin.</p>
+  </div>
+</section>
+
+<section class="post lime closing">
+  <svg class="art" viewBox="4320 0 1080 1350" stroke-width="56" aria-hidden="true"><use href="#thread"/></svg>
+  <header><span class="wordmark">Revize</span><span class="count">5 / 5</span></header>
+  <h2 class="display">Siap punya website sendiri?</h2>
+  <p class="body">Ngobrol dulu, gratis, tanpa istilah teknis.</p>
+  <span class="pill cta">Konsultasi gratis via WhatsApp</span>
+  <!-- TODO: handle Instagram final (samakan dengan site.instagram di src/config.ts) -->
+  <p class="handle"><b>@revize.id</b>Link WhatsApp ada di bio</p>
+</section>
+</body>
+</html>
