@@ -1,0 +1,76 @@
+---
+// Violet hero for inner pages: same type and entrance animation as the home Hero, but a static
+// curve motif instead of Threads (WebGL stays on the home page only, CLAUDE.md §1).
+interface Props {
+  label: string;
+  lead: string;
+}
+
+const { label, lead } = Astro.props;
+---
+
+<!-- Runs before the hero is parsed so the title never flashes before GSAP hides it -->
+<script is:inline>
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");
+</script>
+
+<section class="relative isolate overflow-hidden bg-violet pt-28 pb-16 text-cream md:pt-40 md:pb-24">
+  <svg
+    class="absolute inset-0 -z-10 size-full text-plum"
+    viewBox="0 0 1440 900"
+    preserveAspectRatio="xMidYMid slice"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="44"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <path d="M-120 720C260 420 640 1020 1000 640S1400 360 1560 470" />
+    <path d="M-120 860C320 600 700 1120 1080 780S1440 560 1560 640" />
+    <path d="M860 -80C980 180 1180 260 1560 200" />
+  </svg>
+
+  <div class="mx-auto max-w-7xl px-4 md:px-8">
+    <p data-hero-in data-hero-fade class="inline-flex rounded-full border-2 border-cream/40 px-4 py-1.5 text-sm font-semibold">
+      {label}
+    </p>
+    <h1 data-hero-in data-hero-title class="mt-4 max-w-4xl text-[2.5rem] leading-[1.05] font-bold sm:mt-6 sm:text-5xl md:text-7xl">
+      <slot />
+    </h1>
+    <p data-hero-in data-hero-fade class="mt-4 max-w-xl text-lg text-cream/90 sm:mt-6 md:text-xl">{lead}</p>
+    <div data-hero-in data-hero-fade class="mt-6 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+      <slot name="actions" />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Hide until GSAP takes over; the delayed animation reveals it anyway if the module script never runs. */
+  :global(.motion) [data-hero-in] {
+    visibility: hidden;
+    animation: hero-show 0s 2.5s forwards;
+  }
+  @keyframes hero-show {
+    to {
+      visibility: visible;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin(SplitText);
+
+  if (document.documentElement.classList.contains("motion")) {
+    document.fonts.ready.then(() => {
+      const split = SplitText.create("[data-hero-title]", { type: "words", mask: "words" });
+      gsap.set("[data-hero-in]", { visibility: "visible" });
+      gsap
+        .timeline({ defaults: { ease: "expo.out" } })
+        .from(split.words, { yPercent: 110, duration: 1, stagger: 0.06 })
+        .from("[data-hero-fade]", { y: 24, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" }, 0.3);
+    });
+  }
+</script>

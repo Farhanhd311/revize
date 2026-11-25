@@ -2,7 +2,8 @@
 import { waLink } from "../../config";
 ---
 
-<!-- PRD F-06. Hidden (invisible = not focusable) until the first block is passed; hides again once the closing CTA or footer shows. -->
+<!-- PRD F-06. Hidden (invisible = not focusable) until the first block is passed, and while a section full of
+     buttons that sit under it is on screen ([data-wa-hide]: FAQ, package cards) or the closing CTA / footer. -->
 <a
   data-wa-float
   href={waLink("Halo Revize, saya mau tanya-tanya soal pembuatan website untuk usaha saya.")}
@@ -25,11 +26,30 @@ import { waLink } from "../../config";
   gsap.registerPlugin(ScrollTrigger);
 
   // Show/hide is functional, so it runs under reduced motion too; only the CSS transition is motion-safe.
+  const fab = document.querySelector("[data-wa-float]")!;
+  const covering = new Set<Element>();
+  let past = false;
+  const update = () => fab.classList.toggle("is-shown", past && covering.size === 0);
+
   ScrollTrigger.create({
-    trigger: "main > :not(script)", // the hero, or the first block on other pages (Hero starts with an inline script)
+    trigger: "main > :not(script)", // the hero, or the first block on other pages (heroes start with an inline script)
     start: "bottom top",
-    endTrigger: document.querySelector("[data-cta]") ?? document.querySelector("footer"),
-    end: "top bottom",
-    toggleClass: { targets: "[data-wa-float]", className: "is-shown" },
+    end: "max",
+    onToggle: (self) => {
+      past = self.isActive;
+      update();
+    },
   });
+  for (const el of document.querySelectorAll("[data-wa-hide], [data-cta], footer")) {
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top bottom",
+      end: "bottom top",
+      onToggle: (self) => {
+        if (self.isActive) covering.add(el);
+        else covering.delete(el);
+        update();
+      },
+    });
+  }
 </script>

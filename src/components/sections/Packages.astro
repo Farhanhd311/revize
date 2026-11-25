@@ -1,0 +1,98 @@
+---
+import Button from "../layout/Button.astro";
+import ScrollReveal from "../react/ScrollReveal";
+import { waLink } from "../../config";
+import { packages, fixedPackages, SHOW_PRICES, rupiah } from "../../data/packages";
+
+const custom = packages.find((p) => p.id === "custom")!;
+const askPrice = (name: string) => waLink(`Halo Revize, saya mau tanya harga paket ${name}.`);
+const check = "M5 12.5l4.5 4.5L19 7.5";
+---
+
+<section id="paket" data-wa-hide class="mx-auto max-w-7xl scroll-mt-24 px-4 py-20 md:px-8 md:py-32">
+  <p class="font-semibold text-violet">Layanan</p>
+  <ScrollReveal client:visible mode="enter" enableBlur={false} containerClassName="mt-3 max-w-3xl">
+    Pilih paket website yang pas untuk usaha Anda
+  </ScrollReveal>
+
+  <ul data-reveal class="mt-12 grid gap-5 lg:grid-cols-3">
+    {fixedPackages.map((p) => (
+      <li
+        class:list={[
+          "flex flex-col rounded-[2rem] border p-6 md:p-8",
+          p.recommended ? "border-violet bg-violet text-cream" : "border-ink/10",
+        ]}
+      >
+        {p.recommended && (
+          <p class="mb-4 self-start rounded-full bg-lime px-4 py-1.5 text-sm font-semibold text-ink">Rekomendasi kami</p>
+        )}
+        <h3 class="text-2xl font-bold">{p.name}</h3>
+        <p class:list={["mt-3", p.recommended ? "text-cream/90" : "text-ink/80"]}>{p.body}</p>
+        <p class="mt-3 text-sm font-semibold">Cocok untuk: {p.fit}</p>
+
+        <div class="mt-6">
+          {SHOW_PRICES ? (
+            <p class="font-display text-3xl font-bold">{rupiah(p.price)}</p>
+          ) : (
+            <Button variant="outline" href={askPrice(p.name)} target="_blank" rel="noopener">Tanya harga</Button>
+          )}
+        </div>
+
+        <ul class="mt-6 space-y-3">
+          {p.features.map((f) => (
+            <li class="flex gap-3">
+              <span class="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-lime text-ink" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d={check} /></svg>
+              </span>
+              {f}
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-auto pt-8">
+          <p class="text-sm font-semibold">Selesai {p.duration} · {p.revisions}x revisi</p>
+          <Button
+            href={waLink(`Halo Revize, saya mau pesan paket ${p.name} untuk usaha saya.`)}
+            target="_blank"
+            rel="noopener"
+            class="mt-4 min-h-12 w-full"
+          >
+            Pilih paket ini<span class="sr-only">: {p.name}</span>
+          </Button>
+        </div>
+      </li>
+    ))}
+  </ul>
+
+  <div data-reveal>
+    <div class="mt-5 grid gap-8 rounded-[2rem] bg-ink p-6 text-cream md:grid-cols-[1fr_auto] md:items-end md:p-10">
+      <div>
+        <h3 class="text-2xl font-bold">{custom.name}</h3>
+        <p class="mt-3 max-w-2xl text-cream/90">{custom.body}</p>
+        <p class="mt-3 text-sm font-semibold">Cocok untuk: {custom.fit}</p>
+        <ul class="mt-6 flex flex-wrap gap-2">
+          {custom.features.map((f) => <li class="rounded-full border border-cream/30 px-4 py-1.5 text-sm">{f}</li>)}
+        </ul>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row md:flex-col md:items-stretch">
+        {SHOW_PRICES ? (
+          <p class="font-display text-2xl font-bold">Mulai {rupiah(custom.price)}</p>
+        ) : (
+          <Button variant="outline" href={askPrice(custom.name)} target="_blank" rel="noopener">Tanya harga</Button>
+        )}
+        <Button
+          href={waLink(`Halo Revize, saya butuh website dengan fitur khusus (paket ${custom.name}).`)}
+          target="_blank"
+          rel="noopener"
+          class="min-h-12"
+        >
+          Ceritakan kebutuhan Anda
+        </Button>
+      </div>
+    </div>
+  </div>
+
+  <a href="/layanan#bandingkan" class="mt-10 inline-flex min-h-11 items-center font-semibold text-violet underline underline-offset-8 hover:text-plum">
+    Bandingkan isi semua paket
+  </a>
+</section>

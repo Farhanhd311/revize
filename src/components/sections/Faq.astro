@@ -1,6 +1,10 @@
 ---
+interface Props {
+  items?: { q: string; a: string }[]; // defaults to the home page FAQ
+}
+
 // TODO: jawaban mengikuti FAQ di LAYANAN.md (draf). Cek ulang saat harga dan durasi final.
-const faqs = [
+const homeFaqs = [
   {
     q: "Berapa biaya pembuatan website?",
     a: "Tergantung paket yang Anda pilih: Start, Profil, Katalog, atau Custom. Setelah konsultasi gratis, kami kirim penawaran tertulis dengan harga yang jelas.",
@@ -27,9 +31,11 @@ const faqs = [
     a: "Bisa. Kami bantu menyusun kata-kata untuk website Anda. Kalau belum punya logo, kami juga bisa buatkan sebagai layanan tambahan.",
   },
 ];
+
+const { items: faqs = homeFaqs } = Astro.props;
 ---
 
-<section class="mx-auto max-w-3xl px-4 py-20 md:py-32">
+<section data-wa-hide class="mx-auto max-w-3xl px-4 py-20 md:py-32">
   <p class="font-semibold text-violet">FAQ</p>
   <h2 class="mt-3 text-3xl font-bold md:text-5xl">Pertanyaan yang sering ditanyakan</h2>
 
