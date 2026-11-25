@@ -2,7 +2,7 @@
 import Button from "../layout/Button.astro";
 import ScrollReveal from "../react/ScrollReveal";
 import { waLink } from "../../config";
-import { packages, fixedPackages, SHOW_PRICES, rupiah } from "../../data/packages";
+import { packages, fixedPackages, SHOW_PRICES, INTRO_PRICING, rupiah } from "../../data/packages";
 
 const custom = packages.find((p) => p.id === "custom")!;
 const askPrice = (name: string) => waLink(`Halo Revize, saya mau tanya harga paket ${name}.`);
@@ -30,13 +30,16 @@ const check = "M5 12.5l4.5 4.5L19 7.5";
         <p class:list={["mt-3", p.recommended ? "text-cream/90" : "text-ink/80"]}>{p.body}</p>
         <p class="mt-3 text-sm font-semibold">Cocok untuk: {p.fit}</p>
 
-        <div class="mt-6">
-          {SHOW_PRICES ? (
-            <p class="font-display text-3xl font-bold">{rupiah(p.price)}</p>
-          ) : (
-            <Button variant="outline" href={askPrice(p.name)} target="_blank" rel="noopener">Tanya harga</Button>
-          )}
-        </div>
+        {SHOW_PRICES && (
+          <div class="mt-6">
+            <p class="font-display text-3xl font-bold">{rupiah(INTRO_PRICING ? p.introPrice! : p.price!)}</p>
+            {INTRO_PRICING && (
+              <p class:list={["mt-2 text-sm", p.recommended ? "text-cream/90" : "text-ink/80"]}>
+                Harga perkenalan untuk 5 klien pertama. Harga normal {rupiah(p.price!)}.
+              </p>
+            )}
+          </div>
+        )}
 
         <ul class="mt-6 space-y-3">
           {p.features.map((f) => (
@@ -52,12 +55,12 @@ const check = "M5 12.5l4.5 4.5L19 7.5";
         <div class="mt-auto pt-8">
           <p class="text-sm font-semibold">Selesai {p.duration} · {p.revisions}x revisi</p>
           <Button
-            href={waLink(`Halo Revize, saya mau pesan paket ${p.name} untuk usaha saya.`)}
+            href={SHOW_PRICES ? waLink(`Halo Revize, saya mau pesan paket ${p.name} untuk usaha saya.`) : askPrice(p.name)}
             target="_blank"
             rel="noopener"
             class="mt-4 min-h-12 w-full"
           >
-            Pilih paket ini<span class="sr-only">: {p.name}</span>
+            {SHOW_PRICES ? "Pilih paket ini" : "Tanya harga paket ini"}<span class="sr-only">: {p.name}</span>
           </Button>
         </div>
       </li>
@@ -75,18 +78,14 @@ const check = "M5 12.5l4.5 4.5L19 7.5";
         </ul>
       </div>
       <div class="flex flex-col gap-3 sm:flex-row md:flex-col md:items-stretch">
-        {SHOW_PRICES ? (
-          <p class="font-display text-2xl font-bold">Mulai {rupiah(custom.price)}</p>
-        ) : (
-          <Button variant="outline" href={askPrice(custom.name)} target="_blank" rel="noopener">Tanya harga</Button>
-        )}
+        {SHOW_PRICES && <p class="font-display text-2xl font-bold">Sesuai kebutuhan</p>}
         <Button
-          href={waLink(`Halo Revize, saya butuh website dengan fitur khusus (paket ${custom.name}).`)}
+          href={SHOW_PRICES ? waLink(`Halo Revize, saya butuh website dengan fitur khusus (paket ${custom.name}).`) : askPrice(custom.name)}
           target="_blank"
           rel="noopener"
           class="min-h-12"
         >
-          Ceritakan kebutuhan Anda
+          {SHOW_PRICES ? "Ceritakan kebutuhan Anda" : <>Tanya harga paket ini<span class="sr-only">: {custom.name}</span></>}
         </Button>
       </div>
     </div>

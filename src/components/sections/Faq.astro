@@ -1,13 +1,22 @@
 ---
 interface Props {
-  items?: { q: string; a: string }[]; // defaults to the home page FAQ
+  items?: { q: string; a: string }[]; // defaults to the home page FAQ; `a` is trusted HTML (our own copy only)
 }
 
-// TODO: jawaban mengikuti FAQ di LAYANAN.md (draf). Cek ulang saat harga dan durasi final.
+import { fixedPackages, SHOW_PRICES, INTRO_PRICING, rupiah } from "../../data/packages";
+
+const start = fixedPackages[0];
+const priceAnswer = INTRO_PRICING
+  ? `Mulai ${rupiah(start.introPrice!)} untuk paket ${start.short}, dengan harga perkenalan bagi 5 klien pertama.`
+  : `Mulai ${rupiah(start.price!)} untuk paket ${start.short}.`;
+
+// TODO: jawaban mengikuti FAQ di LAYANAN.md. Harga sudah final; cek ulang durasi saat final.
 const homeFaqs = [
   {
     q: "Berapa biaya pembuatan website?",
-    a: "Tergantung paket yang Anda pilih: Start, Profil, Katalog, atau Custom. Setelah konsultasi gratis, kami kirim penawaran tertulis dengan harga yang jelas.",
+    a: SHOW_PRICES
+      ? `${priceAnswer} Rincian semua paket ada di <a href="/layanan" class="font-semibold text-violet underline underline-offset-4">halaman Paket</a>.`
+      : "Tergantung paket yang Anda pilih: Start, Profil, Katalog, atau Custom. Setelah konsultasi gratis, kami kirim penawaran tertulis dengan harga yang jelas.",
   },
   {
     // TODO: cek durasi saat LAYANAN.md final.
@@ -50,7 +59,7 @@ const { items: faqs = homeFaqs } = Astro.props;
             </svg>
           </span>
         </summary>
-        <p class="pb-6 text-ink/80">{f.a}</p>
+        <p class="pb-6 text-ink/80" set:html={f.a} />
       </details>
     ))}
   </div>

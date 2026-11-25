@@ -2,7 +2,8 @@ export const site = {
   name: "Revize",
   whatsapp: "6285213252639", // format 62..., tanpa + dan spasi
   email: "revizecre@gmail.com",
-  instagram: "revize.id", // TODO: username Instagram final
+  instagram: "revize.cre",
+  tiktok: "revize.cre",
   area: "Seluruh Indonesia (online)", // TODO: area layanan final
 };
 

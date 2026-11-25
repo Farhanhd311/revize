@@ -6,12 +6,12 @@ Nov 25, 2026 · @Elsa
 
 Revize sebaiknya menawarkan 3 paket website dengan harga pasti dan 1 paket custom, ditambah add-on dan paket perawatan bulanan. Harga di bawah adalah rekomendasi awal untuk diputuskan pemilik, diposisikan di tengah pasar UMKM: di atas jasa template murah, di bawah agensi besar.
 
-| Paket | Cocok untuk | Harga rekomendasi | Waktu pengerjaan | Revisi |
-| --- | --- | --- | --- | --- |
-| Revize Start (landing page) | Usaha baru, promosi satu produk/jasa | Rp 1.500.000 | 3–5 hari kerja | 2x |
-| Revize Profil (company profile) — rekomendasi kami | Usaha jasa yang butuh terlihat kredibel | Rp 3.500.000 | 7–14 hari kerja | 3x |
-| Revize Katalog (katalog + pesan via WhatsApp) | Usaha yang menjual banyak produk | Rp 6.000.000 | 14–21 hari kerja | 3x |
-| Revize Custom | Booking, pembayaran online, member, sistem khusus | Mulai Rp 10.000.000 (penawaran) | Sesuai cakupan | Sesuai penawaran |
+| Paket | Cocok untuk | Harga perkenalan (5 klien pertama) | Harga normal | Waktu pengerjaan | Revisi |
+| --- | --- | --- | --- | --- | --- |
+| Revize Start (landing page) | Usaha baru, promosi satu produk/jasa | Rp 1.000.000 | Rp 1.500.000 | 3–5 hari kerja | 2x |
+| Revize Profil (company profile) — rekomendasi kami | Usaha jasa yang butuh terlihat kredibel | Rp 2.500.000 | Rp 3.500.000 | 7–14 hari kerja | 3x |
+| Revize Katalog (katalog + pesan via WhatsApp) | Usaha yang menjual banyak produk | Rp 4.500.000 | Rp 6.000.000 | 14–21 hari kerja | 3x |
+| Revize Custom | Booking, pembayaran online, member, sistem khusus | Sesuai kebutuhan | Sesuai kebutuhan | Sesuai cakupan | Sesuai penawaran |
 
 Semua harga sudah termasuk domain, hosting, dan SSL tahun pertama. Waktu pengerjaan dihitung sejak materi (logo, foto, info usaha) lengkap.
 
@@ -92,7 +92,7 @@ Masih ragu? Konsultasi gratis via WhatsApp dulu. Revize akan merekomendasikan pa
 
 | Waktu | Biaya | Keterangan |
 | --- | --- | --- |
-| Tahun pertama | Rp 3.500.000 | Pembuatan website + alamat + tempat penyimpanan + SSL, dibayar DP 50% lalu pelunasan 50% |
+| Tahun pertama | Rp 2.500.000 (harga perkenalan, 5 klien pertama) atau Rp 3.500.000 (harga normal) | Pembuatan website + alamat + tempat penyimpanan + SSL, dibayar DP 50% lalu pelunasan 50% |
 | Tahun kedua dan seterusnya | Rp 500.000 per tahun | Perpanjangan alamat dan tempat penyimpanan |
 | Atau, pilih perawatan | Rp 150.000 per bulan | Sudah termasuk perpanjangan + 1 perubahan isi per bulan |
 
@@ -114,7 +114,7 @@ Pola yang hampir selalu muncul: harga "mulai dari", domain + hosting + SSL tahun
 
 Setiap paket dibuat custom (bukan template), cepat dibuka di HP, dan memakai gaya animasi khas Revize. Inilah pembeda utama Revize dari jasa template di kisaran harga yang sama.
 
-### Revize Start — Landing Page (Rp 1.500.000)
+### Revize Start — Landing Page (Rp 1.000.000 harga perkenalan, normal Rp 1.500.000)
 
 Satu halaman yang fokus mengajak pengunjung menghubungi via WhatsApp. Cocok untuk usaha baru, promosi satu produk, atau tujuan iklan Instagram/Google.
 
@@ -126,7 +126,7 @@ Satu halaman yang fokus mengajak pengunjung menghubungi via WhatsApp. Cocok untu
 - 2x revisi, selesai 3–5 hari kerja
 - Perubahan isi setelah online: lewat Revize (tidak ada dashboard)
 
-### Revize Profil — Company Profile (Rp 3.500.000) — rekomendasi kami
+### Revize Profil — Company Profile (Rp 2.500.000 harga perkenalan, normal Rp 3.500.000) — rekomendasi kami
 
 Website beberapa halaman untuk usaha jasa yang perlu terlihat kredibel di mata calon pelanggan, mitra, atau tender.
 
@@ -140,7 +140,7 @@ Website beberapa halaman untuk usaha jasa yang perlu terlihat kredibel di mata c
 - 3x revisi, selesai 7–14 hari kerja
 - Gratis perawatan 1 bulan setelah online
 
-### Revize Katalog — Katalog Online + Pesan via WhatsApp (Rp 6.000.000)
+### Revize Katalog — Katalog Online + Pesan via WhatsApp (Rp 4.500.000 harga perkenalan, normal Rp 6.000.000)
 
 Untuk usaha dengan banyak produk (kuliner, fashion, katering, toko). Pembeli memilih produk lalu memesan lewat WhatsApp, tanpa perlu payment gateway.
 
@@ -152,7 +152,7 @@ Untuk usaha dengan banyak produk (kuliner, fashion, katering, toko). Pembeli mem
 - 3x revisi, selesai 14–21 hari kerja
 - Gratis perawatan 2 bulan setelah online
 
-### Revize Custom (mulai Rp 10.000.000)
+### Revize Custom (sesuai kebutuhan)
 
 Untuk kebutuhan di luar paket: sistem booking/reservasi, pembayaran online (payment gateway), keranjang belanja dan ongkir, area member, multi-bahasa, atau integrasi dengan sistem yang sudah ada. Harga dan jadwal diberikan dalam penawaran tertulis setelah konsultasi.
 
@@ -177,7 +177,7 @@ Tabel ini bisa dipakai langsung di halaman /layanan, supaya calon klien bisa mem
 | Revisi | 2x | 3x | 3x |
 | Perawatan gratis setelah online | — | 1 bulan | 2 bulan |
 | Waktu pengerjaan | 3–5 hari kerja | 7–14 hari kerja | 14–21 hari kerja |
-| Harga | Rp 1.500.000 | Rp 3.500.000 | Rp 6.000.000 |
+| Harga perkenalan (5 klien pertama) | Rp 1.000.000 | Rp 2.500.000 | Rp 4.500.000 |
 
 ## Selalu termasuk dan ketentuan kerja
 
@@ -270,8 +270,8 @@ Delapan pertanyaan ini paling sering muncul di halaman jasa sejenis, dan jawaban
 
 Enam hal ini perlu diputuskan sebelum halaman /layanan dibangun.
 
-- [ ] Tetapkan harga final ketiga paket, add-on, dan perawatan (angka di dokumen ini masih rekomendasi).
-- [ ] Putuskan harga perkenalan untuk 5 klien pertama, misalnya potongan 25% dengan syarat boleh dijadikan portofolio dan memberi testimoni jujur. Tulis batasnya dengan jelas.
+- [x] Tetapkan harga final ketiga paket, add-on, dan perawatan (angka di dokumen ini masih rekomendasi).
+- [x] Putuskan harga perkenalan untuk 5 klien pertama, misalnya potongan 25% dengan syarat boleh dijadikan portofolio dan memberi testimoni jujur. Tulis batasnya dengan jelas.
 - [ ] Pastikan layanan branding (logo, identitas brand) ikut ditawarkan di MVP atau tidak (pertanyaan terbuka no. 3 di PRD).
 - [ ] Pilih penyedia hosting untuk situs klien yang mengizinkan penggunaan komersial.
 - [ ] Pilih cara klien Katalog mengedit produk (CMS berbasis Git atau layanan CMS gratis), dengan bantuan Claude Code.

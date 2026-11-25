@@ -1,6 +1,8 @@
 // Single source for packages, add-ons, maintenance and renewals (from LAYANAN.md).
-// Prices are draft recommendations: they stay here but are hidden while SHOW_PRICES is false.
-export const SHOW_PRICES = false; // TODO: ubah ke true setelah harga di LAYANAN.md final
+// false hides every price on the site (cards fall back to "Tanya harga paket ini").
+export const SHOW_PRICES = true;
+// Intro price for the first 5 clients; set to false once that quota is used up.
+export const INTRO_PRICING = true;
 
 export const rupiah = (n: number) => `Rp ${n.toLocaleString("id-ID")}`;
 
@@ -12,6 +14,7 @@ export const packages = [
     body: "Landing page (website satu halaman) ibarat brosur digital: pelanggan cukup scroll, lalu chat Anda di WhatsApp.",
     fit: "bengkel, les privat, toko kue",
     icon: "M12 3v3M12 18v3M3 12h3M18 12h3M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10z",
+    introPrice: 1_000_000,
     price: 1_500_000,
     renewal: 350_000,
     duration: "3–5 hari kerja",
@@ -31,6 +34,7 @@ export const packages = [
     body: "Company profile (website beberapa halaman) ibarat ruang pamer, supaya usaha Anda terlihat resmi dan dipercaya.",
     fit: "katering, salon, jasa renovasi",
     icon: "M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM3 9h18",
+    introPrice: 2_500_000,
     price: 3_500_000,
     renewal: 500_000,
     duration: "7–14 hari kerja",
@@ -52,6 +56,7 @@ export const packages = [
     body: "Katalog online ibarat etalase toko: semua produk tampil lengkap, pembeli tinggal pesan lewat WhatsApp.",
     fit: "toko kue, butik, toko oleh-oleh",
     icon: "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z",
+    introPrice: 4_500_000,
     price: 6_000_000,
     renewal: 750_000,
     duration: "14–21 hari kerja",
@@ -72,8 +77,6 @@ export const packages = [
     body: "Website dengan fitur khusus, misalnya pelanggan booking jadwal sendiri atau bayar langsung di website.",
     fit: "salon, klinik, tempat kursus",
     icon: "M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z",
-    price: 10_000_000,
-    priceFrom: true,
     duration: "Sesuai kebutuhan",
     features: [
       "Booking jadwal online",

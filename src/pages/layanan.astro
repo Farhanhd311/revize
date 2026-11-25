@@ -170,13 +170,17 @@ const faqs = [
             ))}
           </ul>
           <div class="mt-auto pt-8">
-            {SHOW_PRICES ? (
+            {SHOW_PRICES && (
               <p class="font-display text-2xl font-bold">{rupiah(c.price)} <span class="font-sans text-base font-semibold">/ bulan</span></p>
-            ) : (
-              <Button variant="outline" href={waLink(`Halo Revize, saya mau tanya harga paket perawatan ${c.name}.`)} target="_blank" rel="noopener">
-                Tanya harga<span class="sr-only">: {c.name}</span>
-              </Button>
             )}
+            <Button
+              href={waLink(SHOW_PRICES ? `Halo Revize, saya mau ambil paket perawatan ${c.name}.` : `Halo Revize, saya mau tanya harga paket perawatan ${c.name}.`)}
+              target="_blank"
+              rel="noopener"
+              class:list={["min-h-12 w-full", SHOW_PRICES && "mt-4"]}
+            >
+              {SHOW_PRICES ? "Pilih paket ini" : "Tanya harga paket ini"}<span class="sr-only">: {c.name}</span>
+            </Button>
           </div>
         </li>
       ))}
@@ -190,7 +194,7 @@ const faqs = [
   </Process>
 
   <section class="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-32">
-    <p class="font-semibold text-violet">Ditulis terbuka</p>
+    <p class="font-semibold text-violet">{SHOW_PRICES ? "Ditulis terbuka" : "Biaya tahunan"}</p>
     <h2 class="mt-3 max-w-3xl text-3xl font-bold md:text-5xl">Biaya setelah tahun pertama</h2>
     <p class="mt-4 max-w-2xl text-lg text-ink/80">
       Tiap tahun ada biaya perpanjangan alamat dan tempat website, seperti sewa toko. Isinya: alamat website, tempat penyimpanan, gembok keamanan, dan pengecekan rutin.

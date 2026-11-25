@@ -1,7 +1,10 @@
 ---
-import { comparison, fixedPackages, SHOW_PRICES, rupiah } from "../../data/packages";
+import { comparison, fixedPackages, SHOW_PRICES, INTRO_PRICING, rupiah } from "../../data/packages";
 
-const rows = SHOW_PRICES ? [...comparison, { label: "Harga", values: fixedPackages.map((p) => rupiah(p.price)) }] : comparison;
+// Same main price as the package cards, so the table never contradicts them.
+const rows = SHOW_PRICES
+  ? [...comparison, { label: INTRO_PRICING ? "Harga perkenalan (5 klien pertama)" : "Harga", values: fixedPackages.map((p) => rupiah(INTRO_PRICING ? p.introPrice! : p.price!)) }]
+  : comparison;
 ---
 
 <section id="bandingkan" class="mx-auto max-w-7xl scroll-mt-24 px-4 py-16 md:px-8 md:py-24">
@@ -22,7 +25,7 @@ const rows = SHOW_PRICES ? [...comparison, { label: "Harga", values: fixedPackag
       <caption class="sr-only">Perbandingan isi paket Start, Profil, dan Katalog</caption>
       <thead>
         <tr>
-          <th scope="col" class="sticky left-0 w-40 bg-cream p-4 align-bottom text-sm font-semibold text-ink/70 md:w-72">Isi paket</th>
+          <th scope="col" class="sticky left-0 w-40 bg-cream p-4 align-bottom text-sm font-semibold text-ink/70 md:w-52 lg:w-72">Isi paket</th>
           {fixedPackages.map((p) => (
             <th scope="col" class="p-4 align-bottom">
               {p.recommended && (
